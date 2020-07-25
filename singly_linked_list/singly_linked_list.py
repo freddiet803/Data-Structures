@@ -111,8 +111,19 @@ class LinkedList():
                 if currentNode.get_value() == value:
                     return True
 
-                currentNode = currentNode.get_next()
-                count += 1
+            currentNode = currentNode.get_next()
+            count += 1
+            return False
+
+    def find_middle(self):
+        # doing in one pass with no len attribute
+
+        mid_point = self.head
+        end_point = self.head
+        while end_point is not None and end_point.get_next() is not None:
+            mid_point = mid_point.get_next()
+            end_point = end_point.get_next().get_next()
+        return mid_point.value
 
 
 mylist = LinkedList()
