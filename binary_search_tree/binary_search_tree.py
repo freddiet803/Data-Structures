@@ -75,17 +75,43 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self.left is not None:
+            self.left.in_order_print()
+        print(self.value)
+
+        if self.right is not None:
+            self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self):
-        pass
+        from collections import deque
+        queue = deque()
+        queue.append(self)
+
+        while len(queue) > 0:
+            current = queue.popleft()  # following FIFO remove the first node in queue
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            print(current.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self):
-        pass
+        stack = []
+        stack.append(self)
+
+        while len(stack) > 0:  # stacks are LIFO and grabbing right first should give dpth first traversal
+            current = stack.pop()
+            if current.left:
+                stack.append(current.left)
+            if current.right:
+                stack.append(current.right)
+            print(current.value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -112,12 +138,13 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 print(bst.right.left.value)
-print(bst.contains(3))
+print(bst.contains(77))
 print(bst.get_max())
 
-# bst.bft_print()
-# bst.dft_print()
-
+bst.bft_print()
+bst.dft_print()
+print('####################################################################################')
+bst.in_order_print()
 #print("elegant methods")
 #print("pre order")
 # bst.pre_order_dft()
